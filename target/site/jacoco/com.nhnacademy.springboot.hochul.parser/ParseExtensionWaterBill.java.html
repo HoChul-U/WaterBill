@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParseExtensionWaterBill.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">WaterBill-hochul</a> &gt; <a href="index.source.html" class="el_package">com.nhnacademy.springboot.hochul.parser</a> &gt; <span class="el_source">ParseExtensionWaterBill.java</span></div><h1>ParseExtensionWaterBill.java</h1><pre class="source lang-java linenums">package com.nhnacademy.springboot.hochul.parser;
+
+import com.nhnacademy.springboot.hochul.repository.WaterBill;
+import java.io.InputStream;
+import java.util.List;
+import org.springframework.stereotype.Service;
+
+/*
+ * 확장자에 따라서 CsvWaterBill 이나 JsonWaterBill 을 실행하는 클래스
+ *  */
+
+@Service
+<span class="fc" id="L13">public class ParseExtensionWaterBill implements Parser {</span>
+<span class="fc" id="L14">    private static String extension = &quot;json&quot;;</span>
+
+    Parser parser;
+
+    List&lt;WaterBill&gt; waterBills;
+
+<span class="fc" id="L20">    private boolean load = false;</span>
+
+    public void setLoad(boolean load) {
+<span class="fc" id="L23">        this.load = load;</span>
+<span class="fc" id="L24">    }</span>
+
+    public boolean isLoad() {
+<span class="fc" id="L27">        return load;</span>
+    }
+
+    @Override
+    public void load() {
+<span class="pc bpc" id="L32" title="2 of 4 branches missed.">        if (!(extension.equals(&quot;csv&quot;) || extension.equals(&quot;json&quot;))) throw new IllegalArgumentException(&quot;fail extension&quot;);</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (extension.equals(&quot;csv&quot;)) parser = ParseCsvWaterBill.getInstance();</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (extension.equals(&quot;json&quot;)) parser = ParseJsonWaterBill.getInstance();</span>
+
+<span class="fc" id="L36">        parser.load();</span>
+<span class="fc" id="L37">        waterBills = parser.findAll();</span>
+<span class="fc" id="L38">        setLoad(true);</span>
+<span class="fc" id="L39">    }</span>
+
+    @Override
+    public List&lt;WaterBill&gt; findAll() {
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (!isLoad()) {</span>
+<span class="fc" id="L44">            throw new IllegalStateException(&quot;Load first&quot;);</span>
+        }
+<span class="fc" id="L46">        return waterBills;</span>
+    }
+
+    @Override
+    public InputStream parser() {
+<span class="nc" id="L51">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

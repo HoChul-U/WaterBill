@@ -1,0 +1,6 @@
+projectKey=com.nhnacademy:WaterBill-hochul
+serverUrl=http://133.186.211.156:9000
+serverVersion=8.9.1.44547
+dashboardUrl=http://133.186.211.156:9000/dashboard?id=com.nhnacademy%3AWaterBill-hochul
+ceTaskId=AYA2lBtLmo2e7XlumjgN
+ceTaskUrl=http://133.186.211.156:9000/api/ce/task?id=AYA2lBtLmo2e7XlumjgN
